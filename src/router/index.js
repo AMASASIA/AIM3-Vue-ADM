@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ChatMessaging from '../components/ChatMessaging.vue'
-import VideoChat from '../components/VideoChat.vue'
-import AiMap from '../components/AiMap.vue'
+
+// 外部ファイルを読み込まず、ここに簡単なテスト用コンポーネントを直接書きます
+const TestComponent = {
+  template: '<h1>テスト成功：ルーターは正しく動作しています！</h1>'
+}
 
 const routes = [
-  { path: '/', component: ChatMessaging },
-  { path: '/video', component: VideoChat },
-  { path: '/map', component: AiMap },
+  { path: '/', component: TestComponent },
+  { path: '/video', component: TestComponent },
+  { path: '/map', component: TestComponent }
 ]
 
 const router = createRouter({
