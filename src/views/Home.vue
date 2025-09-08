@@ -1,0 +1,1 @@
+<template><div>Welcome to AIM3-ADM-WAKU</div></template><script>export default { name: 'Home' }</script>

@@ -1,0 +1,1 @@
+<template><div>Chat Room (Waku)</div></template><script>export default { name: 'ChatRoom' }</script>
