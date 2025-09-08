@@ -2,7 +2,7 @@
   "dependencies": {
     "vue": "^3.0.0",
     "vue-router": "^4.0.0",
-    "@waku/sdk": "^0.21.0",
+    "@waku/sdk": "0.0.22",
     "openai": "^4.0.0"
   }
 }
