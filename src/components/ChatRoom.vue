@@ -1,1 +1,18 @@
-<template><div>Chat Room (Waku)</div></template><script>export default { name: 'ChatRoom' }</script>
+export default async function AiAdvocacyEngine(userInput) {
+  const prompt = `Act as a neutral AI advocate. Respond constructively to: "${userInput}"`
+
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: 'gpt-4',
+      messages: [{ role: 'user', content: prompt }]
+    })
+  })
+
+  const data = await res.json()
+  return data.choices[0]?.message?.content || 'No response'
+}
