@@ -1,23 +1,15 @@
 {
-  "name": "your-project-name",
-  "version": "1.0.0",
   
-  // "scripts"というセクションに命令をまとめます
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
   },
-  
-  // "dependencies"というセクションに部品をまとめます
   "dependencies": {
     "vue": "^3.0.0",
     "vue-router": "^4.0.0",
     "@waku/sdk": "0.0.22",
     "openai": "^4.0.0"
   },
-  
-  "devDependencies": {
-    // ... @vitejs/plugin-vue や vite 本体など
-  }
+
 }
