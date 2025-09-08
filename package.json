@@ -1,13 +1,19 @@
 {
+  "name": "aim3-adm-vue",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.0.0",
+    "vue": "^3.4.21",
     "vue-router": "^4.0.0",
     "@waku/sdk": "0.0.22",
     "openai": "^4.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.2.10"
   }
 }
