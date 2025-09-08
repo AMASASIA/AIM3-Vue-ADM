@@ -1,14 +1,18 @@
+export default async function AiAdvocacyEngine(userInput) {
+  const prompt = `Act as a neutral AI advocate. Respond constructively to: "${userInput}"`
 
-export async function getAIResponse(inputText) {
-  const mockResponses = {
-    'hello': 'Hi there! How can I help you today?',
-    'did': 'DID stands for Decentralized Identifier.',
-    'vote': 'You can vote through the Governance tab.',
-  }
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: 'gpt-4',
+      messages: [{ role: 'user', content: prompt }]
+    })
+  })
 
-  const lower = inputText.toLowerCase()
-  return (
-    mockResponses[lower] ||
-    "I'm your AI advocate. Let me know what you need!"
-  )
+  const data = await res.json()
+  return data.choices[0]?.message?.content || 'No response'
 }
