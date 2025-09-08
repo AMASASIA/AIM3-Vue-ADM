@@ -1,5 +1,4 @@
 {
-  
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,6 +9,5 @@
     "vue-router": "^4.0.0",
     "@waku/sdk": "0.0.22",
     "openai": "^4.0.0"
-  },
-
+  }
 }
