@@ -1,15 +1,39 @@
 <template>
-  <div class="p-4 border rounded-xl shadow bg-white w-full max-w-xl mx-auto">
-    <h2 class="text-xl font-bold mb-4">AI Map Cluster View</h2>
-    <div class="grid grid-cols-2 gap-4">
-      <div class="bg-blue-100 p-4 rounded">🧠 VC Cluster A</div>
-      <div class="bg-green-100 p-4 rounded">📜 Cluster B</div>
-      <div class="bg-yellow-100 p-4 rounded">🎯 Advocacy Nodes</div>
-      <div class="bg-purple-100 p-4 rounded">💬 Sentiment</div>
+  <div class="ai-map">
+    <h2>AI Map - User Clusters</h2>
+    <div class="grid">
+      <div v-for="(node, index) in clusters" :key="index" class="cluster">
+        🧠 {{ node.label }}<br />
+        👥 Users: {{ node.users }}
+      </div>
     </div>
   </div>
 </template>
 
-<script setup>
-// Optional future expansion with D3.js or Chart.js
+<script>
+export default {
+  data() {
+    return {
+      clusters: [
+        { label: 'Supporter', users: 12 },
+        { label: 'Critic', users: 4 },
+        { label: 'Analyst', users: 7 }
+      ]
+    }
+  }
+}
+</script>
+
+<style scoped>
+.grid {
+  display: flex;
+  gap: 1rem;
+}
+.cluster {
+  background: #eee;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+</style>
+
 </script>
