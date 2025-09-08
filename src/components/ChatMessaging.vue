@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import AiAdvocacyEngine from './AiAdvocacyEngine'
+import AiAdvocacyEngine from './AiAdvocacyEngine.js'
 
 export default {
   data() {
