@@ -1,45 +1,60 @@
-<template>
-  <div class="chat-messaging">
-    <div class="messages">
-      <div v-for="(msg, i) in messages" :key="i" class="message">
-        <strong>{{ msg.sender }}:</strong> {{ msg.text }}
-      </div>
-    </div>
-    <input v-model="newMessage" @keydown.enter="sendMessage" placeholder="Type your message..." />
-  </div>
-</template>
+<script setup>
+import { ref } from 'vue'
 
-<script>
-// ファイル拡張子 .js を追加して、正しく読み込めるように修正
-import AiAdvocacyEngine from './AiAdvocacyEngine.js'
+// メッセージ全体を管理するリアクティブな配列
+const messages = ref([
+  { user: 'AI', text: 'こんにちは！何かお手伝いできることはありますか？' }
+])
 
-export default {
-  data() {
-    return {
-      newMessage: '',
-      messages: []
-    }
-  },
-  methods: {
-    async sendMessage() {
-      if (!this.newMessage.trim()) return
-      const userMsg = { sender: 'You', text: this.newMessage }
-      this.messages.push(userMsg)
+// ユーザーが入力中のメッセージを管理
+const newMessage = ref('')
 
-      const aiReply = await AiAdvocacyEngine(this.newMessage)
-      this.messages.push({ sender: 'AI', text: aiReply })
+// AIが応答中かどうかを管理（ローディング表示などに使えます）
+const isLoading = ref(false)
 
-      this.newMessage = ''
-    }
-  }
+// メッセージを送信する関数
+const sendMessage = async () => {
+  // 入力されたメッセージを取得し、前後の空白を削除
+  const userMessage = newMessage.value.trim()
+  // メッセージが空の場合は何もしない
+  if (!userMessage) return;
+
+  // ユーザーのメッセージを画面のリストに追加
+  messages.value.push({ user: 'you', text: userMessage })
+  // 入力欄を空にする
+  newMessage.value = ''
+  // AIの応答待ち状態にする
+  isLoading.value = true
+
+  try {
+    // Vercel上に作成したサーバーレス関数を呼び出す
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // ユーザーのメッセージをサーバーに送信
+      body: JSON.stringify({ message: userMessage }),
+    });
+
+    // ネットワークエラーなどをチェック
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    // サーバーからの返信を受け取る
+    const data = await response.json();
+    
+    // AIからの返信を画面のリストに追加
+    messages.value.push({ user: 'AI', text: data.text });
+
+  } catch (error) {
+    // エラーが発生した場合の処理
+    console.error("Error fetching AI response:", error);
+    messages.value.push({ user: 'AI', text: '申し訳ありません、エラーが発生しました。' });
+  } finally {
+    // AIの応答待ち状態を解除
+    isLoading.value = false;
+  }
 }
 </script>
-
-<style scoped>
-.chat-messaging {
-  padding: 1rem;
-}
-.message {
-  margin-bottom: 0.5rem;
-}
-</style>
