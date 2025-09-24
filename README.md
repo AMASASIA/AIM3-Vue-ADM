@@ -3,7 +3,7 @@ Includes AI Advocacy chat, video ID UI, and a AImap.
 
 This repository contains the fully integrated AIM3-ADM super app, combining video chat, AI map visualization, Stripe payments, NFT/SBT minting, and DAO governance UI.
 
-// AI response logic placeholder (OpenAI / Gemini)
+// AI response logic placeholder  （Gemini)
 export default function generateResponse(msg) { return 'AI response'; }
 
 ---
@@ -42,7 +42,7 @@ npm install
 npm run dev
 ```
 
-Then open [http://localhost:5173](http://localhost:5173).
+
 
 ---
 
